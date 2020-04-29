@@ -29,6 +29,7 @@ func AppendFromContext(ctx context.Context, funcName string) (context.Context, I
 	return newCtx, log
 }
 
+// StoreInContext stores the existing log setting in the context so that it can be retrieved later
 func StoreInContext(ctx context.Context, log ILog) context.Context {
 	return context.WithValue(ctx, loggerKey, log)
 }
