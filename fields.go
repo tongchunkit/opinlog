@@ -30,8 +30,8 @@ func (field *Field) convertToEntry() *logrus.Entry {
 }
 
 // NewField returns a new field
-func NewField(key string, value interface{}, transformations ...func(input string) string) *Field {
-	return &Field{
+func NewField(key string, value interface{}, transformations ...func(input string) string) Field {
+	return Field{
 		key:             key,
 		value:           value,
 		transformations: transformations,
@@ -46,8 +46,10 @@ func convertToEntry(trace []string, fields ...Field) *logrus.Entry {
 		kvPairs[key] = value
 	}
 
-	traceString := strings.Join(trace, ".")
-	kvPairs["method"] = traceString
+	if len(trace) > 0 {
+		traceString := strings.Join(trace, ".")
+		kvPairs["method"] = traceString
+	}
 
 	return logrus.WithFields(kvPairs)
 }

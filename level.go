@@ -3,6 +3,7 @@ package opinlog
 import "github.com/sirupsen/logrus"
 
 // LogLevel is the type for log level
+// this is used so that users do not have to expose logrus
 type LogLevel int
 
 const (
