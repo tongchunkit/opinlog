@@ -65,6 +65,7 @@ These are the levels that are exposed by this wrapper.
 `Error(Message, fields...)`: Outputs the log at error level
 
 `StoreFields(fields...)`: Stores the key-value fields in the logger for passing around
+Overwrites the existing key if there is any
 
 ### Other APIs
 These are other APIs that could be useful
@@ -100,7 +101,7 @@ var (
 func UpperFunction(ctx context.Context, param string) {
     ctx, log := opinlog.AppendFromContext(ctx, "upper")
     log.Info(logUpperFunction, opinlog.NewField("param", param))
-    // will log somthing like "stack=upper, msg=upper function msg, param=<value>"
+    // will log somthing like "stack=upper, msg=upper function msg, param=<your value>"
 
     lowerFunction(ctx)
 }
@@ -119,12 +120,29 @@ func someFunction(ctx context.Context) {
     log.StoreFields(opinlog.NewField("key", "value"))
 
     log.Info(opinlog.NewMessage("info 1"))
-    // will log somthing like "msg=info 1, key="value""
+    // will log somthing like "msg=info 1, key=value"
 
     log.Info(opinlog.NewMessage("info 2"))
-    // will log somthing like "msg=info 2, key="value""
+    // will log somthing like "msg=info 2, key=value"
 
     // to update the context to pass the fields down the call stack
     ctx = StoreInContext(ctx, log)
+}
+```
+
+* To obfuscate fields
+```
+var obfuscateFunction = func(input string) string {
+    if input == "value" {
+        return "<obfuscated>"
+    }
+    return input
+}
+
+func someFunction(ctx context.Context) {
+    log := opinlog.GetFromContext(ctx)
+    
+    log.Info(opinlog.NewField("key", "value", obfuscateFunction)
+    // will log somthing like "msg=info 1, key=<obfuscated>"
 }
 ```
