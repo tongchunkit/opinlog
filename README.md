@@ -64,7 +64,7 @@ These are the levels that are exposed by this wrapper.
 
 `Error(Message, fields...)`: Outputs the log at error level
 
-`StoreFields(fields...)`: Stores the key-value fields in the logger for passing around
+`StoreFields(fields...)`: Stores the key-value fields in the logger for passing around.
 Overwrites the existing key if there is any
 
 ### Other APIs
