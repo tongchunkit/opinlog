@@ -124,7 +124,7 @@ func someFunction(ctx context.Context) {
     log.Info(opinlog.NewMessage("info 2"))
     // will log somthing like "msg=info 2, key="value""
 
-    // optional to update the context to pass this down the call stack
+    // to update the context to pass the fields down the call stack
     ctx = StoreInContext(ctx, log)
 }
 ```
