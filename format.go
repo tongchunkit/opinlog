@@ -6,6 +6,16 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// TextFormatter embeds the logrus struct so that users do not have to import logrus
+type TextFormatter struct {
+	logrus.TextFormatter
+}
+
+// JSONFormatter embeds the logrus struct so that users do not have to import logrus
+type JSONFormatter struct {
+	logrus.JSONFormatter
+}
+
 // LogFormat is the type for log format
 // this is used so that users do not have to expose logrus
 type LogFormat int
@@ -16,7 +26,7 @@ const (
 	FormatAsJSON LogFormat = 2
 )
 
-// SetLogFormat sets the log format
+// SetLogFormat sets default log formats
 func SetLogFormat(format LogFormat) {
 	switch format {
 	case FormatAsNone:
@@ -28,4 +38,9 @@ func SetLogFormat(format LogFormat) {
 	case FormatAsJSON:
 		logrus.SetFormatter(&logrus.JSONFormatter{})
 	}
+}
+
+// SetLogFormatManual allows users to customize the options manually
+func SetLogFormatManual(format logrus.Formatter) {
+	logrus.SetFormatter(format)
 }

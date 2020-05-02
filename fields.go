@@ -7,6 +7,15 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// NewField returns a new field
+func NewField(key string, value interface{}, transformations ...func(input string) string) Field {
+	return Field{
+		key:             key,
+		value:           value,
+		transformations: transformations,
+	}
+}
+
 // Field is a key value pair for holding structured logs
 type Field struct {
 	key string
@@ -29,15 +38,6 @@ func (field *Field) convertToEntry() *logrus.Entry {
 	return logrus.WithField(key, value)
 }
 
-// NewField returns a new field
-func NewField(key string, value interface{}, transformations ...func(input string) string) Field {
-	return Field{
-		key:             key,
-		value:           value,
-		transformations: transformations,
-	}
-}
-
 func convertToEntry(trace []string, fields ...Field) *logrus.Entry {
 	kvPairs := map[string]interface{}{}
 
@@ -47,8 +47,8 @@ func convertToEntry(trace []string, fields ...Field) *logrus.Entry {
 	}
 
 	if len(trace) > 0 {
-		traceString := strings.Join(trace, separator)
-		kvPairs["method"] = traceString
+		traceString := strings.Join(trace, functionStackSeparator)
+		kvPairs[functionStackKey] = traceString
 	}
 
 	return logrus.WithFields(kvPairs)
