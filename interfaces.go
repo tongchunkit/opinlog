@@ -1,6 +1,6 @@
 package opinlog
 
-// ILog ...
+// ILog is the interface used
 type ILog interface {
 	Trace(message Message, fields ...Field)
 	Debug(message Message, fields ...Field)
