@@ -77,18 +77,23 @@ Common use cases of the transformation functions is to obfuscate sensitive infor
 These are the levels that are exposed by this wrapper. 
 
 `Trace(Message, fields...)`: Outputs the log at trace level
+
 `TraceRaw(string, fields...)`: Outputs the log at trace level
 
 `Debug(Message, fields...)`: Outputs the log at debug level
+
 `DebugRaw(string, fields...)`: Outputs the log at debug level
 
 `Info(Message, fields...)`: Outputs the log at info level
+
 `InfoRaw(string, fields...)`: Outputs the log at info level
 
 `Warn(Message, fields...)`: Outputs the log at warn level
+
 `WarnRaw(string, fields...)`: Outputs the log at warn level
 
 `Error(Message, fields...)`: Outputs the log at error level
+
 `ErrorRaw(string, fields...)`: Outputs the log at error level
 
 `StoreFields(fields...)`: Stores the key-value fields in the logger for passing around
