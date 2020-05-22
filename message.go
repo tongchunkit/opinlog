@@ -1,17 +1,11 @@
 package opinlog
 
-// Message refers to the log message to be used
-type Message struct{
-	message string
-}
-
-func (message *Message) String() string {
-	return message.message
-}
-
-// NewMessage returns a new message
-func NewMessage(message string) Message {
-	return Message{
-		message: message,
-	}
-}
+// Message is a function that returns a string message with the fields
+// How to use sample:
+// func UnmarshalError(obj interface{}, err error) opinlog.Message {
+//   return func() (string, []opinlog.Field) {
+//     return "unmarshal error",
+//       opinlog.NewFields(opinlog.NewField("err", err), opinlog.NewField("obj", obj))
+//   }
+// }
+type Message = func() (string, []Field)
