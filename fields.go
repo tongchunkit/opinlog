@@ -16,6 +16,13 @@ func NewField(key string, value interface{}, transformations ...func(input strin
 	}
 }
 
+// NewFields returns an array of fields
+func NewFields(field Field, fields ...Field) []Field {
+	_fields := []Field{field}
+	_fields = append(_fields, fields...)
+	return _fields
+}
+
 // Field is a key value pair for holding structured logs
 type Field struct {
 	key string
