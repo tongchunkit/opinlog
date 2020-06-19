@@ -15,7 +15,8 @@ In the logs, you can include the execution path of functions that the code has t
 You can use transformation functions in the fields to transform the output before writing to the log.
 While you can transform the logs outside using another program (e.g. logstash or fluentd), 
 this allows you to transform outputs that you already know that you want to change. 
-Another example of this could be to mask sensitive information (such as emails) in your logs.
+
+An example of this could be to mask sensitive information (such as personal names or emails) in the logs.
 
 ### Fixed messages
 You have perhaps seen examples where one line writes `log.Error("unmarshal error")` 
