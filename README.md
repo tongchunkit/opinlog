@@ -29,9 +29,6 @@ By having a `Message` object instead of string, the idea is to force devs to kee
 ### Context APIs
 Context APIs are used to get/update the logger object from the context object. 
 
-`NewFromContext(ctx)`: Returns a new instance of the logger along with the updated context. 
-Pass this context throughout the functions to access the same instance of the logger. 
-
 `GetFromContext(ctx)`: Returns the existing logger stored in the context. 
 Creates a new instance if an existing logger does not exist. 
 
