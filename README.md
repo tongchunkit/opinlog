@@ -114,7 +114,7 @@ Default key is `stack`
 * To get a logger and log some information
 ```
 func SomeFunc(ctx context.Context, param string) {
-    _, log := opinlog.NewFromContext(ctx)
+    log := opinlog.GetFromContext(ctx)
     log.InfoRaw("log this message", opinlog.NewField("param", param))
     // will log somthing like "msg=log this message, param=<value>"
 } 
