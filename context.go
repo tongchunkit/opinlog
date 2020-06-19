@@ -8,14 +8,6 @@ const (
 	loggerKey contextKey = "_opinlog"
 )
 
-// NewFromContext creates a new logger and stores it in the context
-// to get this same logger later, you need to use the returned context
-func NewFromContext(ctx context.Context) (context.Context, ILog) {
-	log := &OpinLog{}
-	newCtx := StoreInContext(ctx, log)
-	return newCtx, log
-}
-
 // GetFromContext gets the existing logger from the context
 // returns new logger if it does not exist
 func GetFromContext(ctx context.Context) ILog {
