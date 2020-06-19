@@ -7,8 +7,11 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// FieldTransformFunc is the func type of the transformation function
+type FieldTransformFunc func(input string) string
+
 // NewField returns a new field
-func NewField(key string, value interface{}, transformations ...func(input string) string) Field {
+func NewField(key string, value interface{}, transformations ...FieldTransformFunc) Field {
 	return Field{
 		key:             key,
 		value:           value,
@@ -27,7 +30,7 @@ func NewFields(field Field, fields ...Field) []Field {
 type Field struct {
 	key string
 	value interface{}
-	transformations []func(input string) string
+	transformations []FieldTransformFunc
 }
 
 func (field *Field) convertToKeyAndValue() (key string, value string) {
