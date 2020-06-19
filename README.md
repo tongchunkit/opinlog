@@ -5,20 +5,24 @@
 A personal logger that is built on top of the [logrus](https://github.com/sirupsen/logrus) library. 
 
 This wrapper over logrus was created to add a few features that looked useful to include on top of structured logging.
-This wrapper also makes extensive use of the context object.   
 
-For example, you might want to have the function name (along with the stack) together with the logs.
-This library allows that to be done easily by using the context object.
+## Features
+### Execution path
+In the logs, you can include the execution path of functions that the code has taken.
+* Sample output: `stack="func1.func2" msg="hi from func2"`
 
-Another example would be to mask sensitive information (such as emails) in your logs 
-(if external logging filters cannot catch those via regular expressions). 
-You can achieve that by passing a transformation function when creating a key-value pair of the object in the structured log. 
+### Transformation of structured logging fields
+You can use transformation functions in the fields to transform the output before writing to the log.
+While you can transform the logs outside using another program (e.g. logstash or fluentd), 
+this allows you to transform outputs that you already know that you want to change. 
+Another example of this could be to mask sensitive information (such as emails) in your logs.
 
-A helpful wrapper here would be the `Message` object.  
-You have perhaps seen one line which does `log.Error("unmarshal error")` 
-and another line elsewhere which does `log.Error("error unmarshalling object")`. 
-These basically have the same meaning but it makes the logs inconsistent. 
-By having a `Message` object, the idea is to force devs to keep a list of `Message` vars somewhere that can be reused. 
+### Fixed messages
+You have perhaps seen examples where one line writes `log.Error("unmarshal error")` 
+and another line writes `log.Error("error unmarshalling object")`.
+These logs basically have the same meaning but it makes the logs inconsistent.
+
+By having a `Message` object instead of string, the idea is to force devs to keep a list of `Message` vars somewhere that can be reused.
 
 ## APIs
 ### Context APIs
